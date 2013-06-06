@@ -1,18 +1,18 @@
 package jeopardy;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Jogo {
 	
-	private Set<Categoria, Pergunta> perguntas;
+	private Map<Categoria, Pergunta> perguntas;
 	
 	public Jogo() {
-		perguntas = new HashSet<Categoria, Pergunta>();
+		perguntas = new HashMap<Categoria, Pergunta>();
 	}
 	
 	public void addPergunta(Pergunta pergunta) {
-		perguntas.add(pergunta.getCategoria(), pergunta);
+		perguntas.put(pergunta.getCategoria(), pergunta);
 	}
 	
 	
