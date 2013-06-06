@@ -14,18 +14,17 @@ public class Pergunta {
 		respostas = new ArrayList<Resposta>();
 	}
 
-	public void addResposta(Resposta resposta) {
-
+	public void addResposta(Resposta resposta) throws RespostaUsadaException {
 		if (!resposta.emUso()) {
-
+			resposta.usar();
+			respostas.add(resposta);
+		} else {
+			throw new RespostaUsadaException();
 		}
-
 	}
 
 	public Categoria getCategoria() {
-
 		return categoria;
-
 	}
 
 }
