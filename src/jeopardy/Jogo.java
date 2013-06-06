@@ -5,14 +5,14 @@ import java.util.Set;
 
 public class Jogo {
 	
-	private Set<Pergunta> perguntas;
+	private Set<Categoria, Pergunta> perguntas;
 	
 	public Jogo() {
-		perguntas = new HashSet<Pergunta>();
+		perguntas = new HashSet<Categoria, Pergunta>();
 	}
 	
 	public void addPergunta(Pergunta pergunta) {
-		perguntas.add(pergunta);
+		perguntas.add(pergunta.getCategoria(), pergunta);
 	}
 	
 	
