@@ -36,7 +36,7 @@ public class Jogo {
 		while(it.hasNext()) {
 			
 			Map.Entry perguntas = (Map.Entry)it.next();
-	       	System.out.println("ola");
+	       	System.out.println(perguntas);
 		}
 	}
 
