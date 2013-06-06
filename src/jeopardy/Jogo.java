@@ -1,11 +1,12 @@
 package jeopardy;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 public class Jogo {
 
-	private Map<Categoria, Pergunta> perguntas;
+	private HashMap<Categoria, Pergunta> perguntas;
 	private String nome;
 	private int maximoPerguntas;
 	private int totalPerguntas;
@@ -28,7 +29,15 @@ public class Jogo {
 	}
 	
 	public void jogar() {
+		System.out.println(nome);
 		
+		Iterator it = perguntas.entrySet().iterator();
+		
+		while(it.hasNext()) {
+			
+			Map.Entry perguntas = (Map.Entry)it.next();
+	       	System.out.println("ola");
+		}
 	}
 
 	public static void main(String[] args) {
@@ -45,7 +54,7 @@ public class Jogo {
 		} catch (RespostaUsadaException e) {
 			System.out.println(e.getMessage());
 		}
-
+		jogo.jogar();
 	}
 
 }

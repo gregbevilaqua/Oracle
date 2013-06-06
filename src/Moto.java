@@ -1,14 +1,14 @@
+public class Moto extends Veiculo {
 
-public class Moto extends Veiculo{
-	
 	boolean capacete;
-	
-	public Moto(String nome){
+
+	public Moto(String nome) {
 		super(nome, 2);
-		aceleracao=10;
-		velocidadeMaxima=180;
+		aceleracao = 10;
+		velocidadeMaxima = 180;
 	}
-	public boolean checarSeguranca(){
+
+	public boolean checarSeguranca() {
 
 		return capacete;
 	}
