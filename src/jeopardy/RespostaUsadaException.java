@@ -2,13 +2,10 @@ package jeopardy;
 
 public class RespostaUsadaException extends Exception {
 
-	public RespostaUsadaException() {
-		super();
-	}
+	private static final long serialVersionUID = 1L;
 
-	public RespostaUsadaException(String message) {
+	public RespostaUsadaException() {
 		super("Resposta ja foi utilizada por outra pergunta");
 	}
-
 	
 }
