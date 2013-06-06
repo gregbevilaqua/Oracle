@@ -3,7 +3,7 @@ package jeopardy;
 public class Resposta {
 	private final String texto;
 	private final boolean correta;
-	private final boolean emUso;
+	private boolean emUso;
 	
 	public Resposta(String texto, boolean correta, boolean emUso) {
 		this.texto = texto;
@@ -23,5 +23,8 @@ public class Resposta {
 		return emUso;
 	}
 	
+	public void usar() {
+		emUso = true;
+	}
 	
 }
