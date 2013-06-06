@@ -5,10 +5,9 @@ public class Resposta {
 	private final boolean correta;
 	private boolean emUso;
 
-	public Resposta(String texto, boolean correta, boolean emUso) {
+	public Resposta(String texto, boolean correta) {
 		this.texto = texto;
 		this.correta = correta;
-		this.emUso = emUso;
 	}
 
 	public String getTexto() {

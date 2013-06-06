@@ -26,9 +26,26 @@ public class Jogo {
 			totalPerguntas++;
 		}
 	}
+	
+	public void jogar() {
+		
+	}
 
 	public static void main(String[] args) {
 		Jogo jogo = new Jogo("Perguntas e Respostas");
+
+		Pergunta p1 = new Pergunta(
+				Categoria.STRINGS,
+				"Qual a maneira correta para verificar a quantidade de caracteres de uma String?");
+		try {
+			p1.addResposta(new Resposta("Atraves da propriedade lenght", false));
+			p1.addResposta(new Resposta("Atraves do metodo lenght", true));
+			p1.addResposta(new Resposta("Atraves da propriedade size", false));
+			p1.addResposta(new Resposta("Atraves da metodo size", false));
+		} catch (RespostaUsadaException e) {
+			System.out.println(e.getMessage());
+		}
+
 	}
 
 }
