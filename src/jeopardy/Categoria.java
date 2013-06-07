@@ -28,4 +28,9 @@ public enum Categoria {
 	public int pontuacao() {
 		return pontuacao;
 	}
+	
+	@Override
+	public String toString() {
+		return label;
+	}
 }
