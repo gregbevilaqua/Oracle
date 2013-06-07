@@ -8,7 +8,7 @@ public class Resposta {
 		this.texto = texto;
 	}
 
-	public String getTexto() {
+		public String getTexto() {
 		return texto;
 	}
 
@@ -20,4 +20,9 @@ public class Resposta {
 		emUso = true;
 	}
 
+	
+	@Override
+	public String toString() {
+		return texto;
+	}
 }

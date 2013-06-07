@@ -1,17 +1,22 @@
 package jeopardy;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.List;
+
+import javax.swing.JOptionPane;
 
 public class Jogo {
 
-	private HashMap<Categoria, Pergunta> perguntas;
+	private List<Pergunta> perguntas;
 	private String nome;
 	private int maximoPerguntas;
 	private int totalPerguntas;
 	private int pontuacao;
+	private int acertos;
+	int indiceControleQuestao = 1;
+	int indiceApresentacaoQuestao = 0;
+	int totalErros = 0;
 
 	public Jogo(String nome) {
 		this(nome, 10);
@@ -19,154 +24,201 @@ public class Jogo {
 
 	public Jogo(String nome, int maximo) {
 		this.nome = nome;
-		perguntas = new HashMap<Categoria, Pergunta>();
+		perguntas = new ArrayList<Pergunta>();
 		maximoPerguntas = maximo;
 	}
 
 	public void addPergunta(Pergunta pergunta) {
 		if (totalPerguntas < maximoPerguntas) {
-			perguntas.put(pergunta.getCategoria(), pergunta);
+			perguntas.add(pergunta);
 			totalPerguntas++;
 		}
 	}
-<<<<<<< HEAD
-	
-	public void jogar() {
-		System.out.println(nome);
-		
-		Iterator it = perguntas.entrySet().iterator();
-		
-		while(it.hasNext()) {
-			
-			Map.Entry perguntas = (Map.Entry)it.next();
-	       	System.out.println(perguntas);
-		}
-=======
 
-	public void quebrarLinha() {
-		System.out.println("\n");
->>>>>>> cd1c116c9edc3c9a0891ca169af50ef146e246e3
-	}
+	private void inicializar() {
 
-	public Pergunta criarPergunta(Categoria categoria, int indiceDaCorreta,
-			String caput, String... respostas) {
-
-		Pergunta pergunta = new Pergunta(
-				categoria,
-				"Qual a maneira correta para verificar a quantidade de caracteres de uma String?");
-
-		try {
-
-			for (String texto : respostas) {
-				pergunta.addResposta(new Resposta(texto));
-			}
-			pergunta.setCorreta(indiceDaCorreta);
-
-		} catch (RespostaUsadaException e) {
-			e.printStackTrace();
-		}
-
-		return pergunta;
-	}
-
-	public void inicializar() {
-
-		Pergunta pergunta = criarPergunta(
+		Pergunta pergunta = Pergunta.criarPergunta(
 				Categoria.DEPLOYING,
-				2,
+				3,
 				"Se a classe esta em um pacote, o CLASSPATH do sistema deve ser alterado para acessar a classe. Verdadeiro ou Falso?",
 				"1) Verdadeiro", "2) Falso");
 
 		addPergunta(pergunta);
 
-		pergunta = criarPergunta(
+		pergunta = Pergunta.criarPergunta(
 				Categoria.DEPLOYING,
-				2,
+				3,
+				"Qual dos seguintes são arquivos que devem ser enviados para um servidor web para implantar um aplicativo em java?",
+				"1) .HTML",
+				"2) .CSS",
+				"3) .JAR", 
+				"4) .EXE");
+		addPergunta(pergunta);
+
+		pergunta = Pergunta.criarPergunta(
+				Categoria.GENERICS,
+				3,
+				"Qual destes poderia ser um exemplo de Coleção Set?",
+				"1) {1, 1, 2, 22, 305, 26}",
+				"2) {Apple, 1, Carrot, 2}",
+				"3) {1, 2, 5, 178, 259}", 
+				"4) Todas Anteriores");
+		addPergunta(pergunta);
+
+		pergunta = Pergunta.criarPergunta(
+				Categoria.GENERICS,
+				3,
 				"Qual a maneira correta para verificar a quantidade de caracteres de uma String?",
 				"1) Atraves da propriedade lenght",
 				"2) Atraves do metodo lenght",
 				"3) Atraves da propriedade size", "4) Atraves da metodo size");
-
-		pergunta = criarPergunta(
+		
+		addPergunta(pergunta);
+		
+		pergunta = Pergunta.criarPergunta(
 				Categoria.STRINGS,
-				2,
-				"Qual a maneira correta para verificar a quantidade de caracteres de uma String?",
-				"1) Atraves da propriedade lenght",
-				"2) Atraves do metodo lenght",
-				"3) Atraves da propriedade size", "4) Atraves da metodo size");
+				3,
+				"Identificar o método daqueles listados abaixo, que não está disponível para ambos os StringBuilders e Strings?",
+				"1) length ()",
+				"2) delete (int start, int end)",
+				"3) charAt (int index)", 
+				"4) indexOf (String str)");
+		addPergunta(pergunta);
 
-		pergunta = criarPergunta(
+		pergunta = Pergunta.criarPergunta(
 				Categoria.STRINGS,
-				2,
-				"Qual a maneira correta para verificar a quantidade de caracteres de uma String?",
-				"1) Atraves da propriedade lenght",
-				"2) Atraves do metodo lenght",
-				"3) Atraves da propriedade size", "4) Atraves da metodo size");
+				3,
+				"O que significa o ponto (.) Representam em expressões regulares?",
+				"1) indicação de uma ou mais ocorrências do caractere precedente",
+				"2) um jogo para qualquer caractere",
+				"3) um intervalo especificado entre parênteses, que permite a variabilidade de um personagem",
+				"4) nada, é apenas um ponto");
+		
+		addPergunta(pergunta);
+		
+		pergunta = Pergunta.criarPergunta(
+				Categoria.EXCEPTIONS,
+				3,
+				"Quando uma instrução finally será executado?",
+				"1) Só se uma exceção é lançada.",
+				"2) Só no caso de uma exceção não é lançada.",
+				"3) Sempre, não importa se uma exceção é lançada ou não.", 
+				"4) Só se várias exceções são capturados e jogados.",
+				"5) Nunca, ele está lá para fins visuais.");
+		addPergunta(pergunta);
 
-		pergunta = criarPergunta(
-				Categoria.STRINGS,
-				2,
-				"Qual a maneira correta para verificar a quantidade de caracteres de uma String?",
-				"1) Atraves da propriedade lenght",
-				"2) Atraves do metodo lenght",
-				"3) Atraves da propriedade size", "4) Atraves da metodo size");
-
-		pergunta = criarPergunta(
-				Categoria.STRINGS,
-				2,
-				"Qual a maneira correta para verificar a quantidade de caracteres de uma String?",
-				"1) Atraves da propriedade lenght",
-				"2) Atraves do metodo lenght",
-				"3) Atraves da propriedade size", "4) Atraves da metodo size");
-
+		pergunta = Pergunta.criarPergunta(
+				Categoria.EXCEPTIONS,
+				3,
+				"O que você deve fazer para criar sua própria exceção?",
+				"1) Crie uma nova classe que se estende Exception.",
+				"2) Crie uma nova classe que implementa Exception.",
+				"3) Declare o primitivo Exceção de dados.",
+				"4) As exceções não podem ser criados. Eles só são construídos para Java.");
+		
 		addPergunta(pergunta);
 
 	}
+	
+	private String formatarPergunta(Pergunta pergunta) {
+		StringBuilder sb = new StringBuilder();
+		
+		int pontos =  ehPrimeiraChance() ? pergunta.getPontuacao() : pergunta.getPontuacao() / 2;    
+		
+		sb.append("Pontuacao atual: " + pontuacao + "\n");
+		sb.append("Questão " + indiceApresentacaoQuestao + " - Categoria "
+					+ pergunta.getCategoria() +" - ("+ pontos +" pontos)\n" );
+		sb.append(pergunta);
+		sb.append("Informe a opcao correta: ");
 
-	public void jogar() {
+		return sb.toString();
+	}
+	
+	private String informacoesGerais() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(
+				"Sobre o jogo:\n\t- Voce deve selecionar a resposta correta para cada pergunta")
+				.append("\n\t- Existem 5 categorias de perguntas")
+				.append("\n\t- Cada categoria possui uma pontuação especifica, quanto mais alta a categoria, maior a pontuacao")
+				.append("\n\t- Caso voce erre uma questao de uma categoria, voce tera uma segunda chace ")
+				.append("\n\t- Caso voce erre duas perguntas de uma categoria, o jogo acaba.")
+				.append("\n- B O A  S O R T E!!!");
+		return sb.toString();
+	}
 
-		System.out.println(nome);
-
-		quebrarLinha();
-
-		Iterator<?> it = perguntas.entrySet().iterator();
-
-		while (it.hasNext()) {
-
-			Map.Entry<Categoria, Pergunta> categoriaPergunta = (Map.Entry) it
-					.next();
-
-			Pergunta pergunta = categoriaPergunta.getValue();
-
-			System.out.println(pergunta);
-
-			Iterator<Resposta> respostas = pergunta.respostas();
-
-			while (respostas.hasNext()) {
-				System.out.println("\t" + respostas.next().getTexto());
-			}
-
-			System.out.print("Informe a opcao correta: ");
-
-			Scanner scanner = new Scanner(System.in);
-			int palpite = scanner.nextInt();
-
-			if (pergunta.verificar(palpite)) {
-				pontuacao += pergunta.getPontuacao();
-				System.out.println("Parabens, vc acertou");
-			} else {
-				System.out.println("Tente novamente");
-			}
-
-			System.out.println("Pontuacao: " + pontuacao);
-
+	private void verificarMaximoErros() throws Exception {
+		if (totalErros == 2) {
+			throw new Exception();
 		}
+		
+	}
+
+	private boolean ehPrimeiraChance() {
+		return indiceControleQuestao % 2 != 0;
+	}
+
+	
+	public void jogar() {
+		inicializar();
+			
+		JOptionPane.showMessageDialog(null, "Bem-vindo ao " + nome + "\nVocê gostaria de iniciar o jogo?");
+		JOptionPane.showMessageDialog(null, informacoesGerais());
+
+		Iterator<Pergunta> it = perguntas.iterator();
+		
+		while (it.hasNext()) {
+			boolean respostaInvalida = false;
+			int gabarito = 0;
+			
+			indiceApresentacaoQuestao++;
+			
+			Pergunta pergunta = it.next();
+						
+			do {
+				try {
+					respostaInvalida = false;
+					gabarito = Integer.parseInt(JOptionPane.showInputDialog(formatarPergunta(pergunta)));
+				} catch (NumberFormatException e) {
+					respostaInvalida = true;
+					JOptionPane.showMessageDialog(null, "Resposta deve ser um numero. Informe um novo valor");
+				} 
+			
+			} while(respostaInvalida);
+			
+			if (pergunta.verificar(gabarito)) {
+				int pontos =  ehPrimeiraChance() ? pergunta.getPontuacao() : pergunta.getPontuacao() / 2;   
+				pontuacao += pontos;   
+				JOptionPane.showMessageDialog(null, "Parabens, vc acertou e ganhou "+ pontos +" pontos.\nPontuacao: " + pontuacao);
+				acertos++;
+				indiceControleQuestao++;
+				if (it.hasNext()) it.next();
+				totalErros = 0;
+			} else {
+				totalErros++;
+				try {
+					verificarMaximoErros();
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(null, "Voce alcancou o maximo de erros!\n G A M E  O V E R!");
+					System.exit(0);
+				}
+				
+				if (ehPrimeiraChance()) {
+					JOptionPane.showMessageDialog(null, "Tente novamente uma questão desta categoria");
+				} else {
+					JOptionPane.showMessageDialog(null, "Você não ganhou pontos nesta categoria\nPontuacao: " + pontuacao);
+				}
+			}
+
+			indiceControleQuestao++;
+			
+		}
+		
+		JOptionPane.showMessageDialog(null, "F I M  D E  J O G O \nPontuação final: " + pontuacao + "\nVoce acertou " + acertos + " de um total de " + (indiceApresentacaoQuestao) + " questoes");
+		System.exit(0);
 	}
 
 	public static void main(String[] args) {
-
 		Jogo jogo = new Jogo("Perguntas e Respostas");
-		jogo.inicializar();
 		jogo.jogar();
 	}
 
